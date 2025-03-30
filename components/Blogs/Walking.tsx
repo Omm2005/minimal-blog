@@ -1,10 +1,11 @@
 // Walking.tsx
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import { Card, CardContent } from '../ui/card'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
+import WalkingBlog from '@/public/walkingBlog.webp'
 
 type Props = {}
 
@@ -18,6 +19,7 @@ const fadeUp = {
 }
 
 const Walking = (props: Props) => {
+  const [isLoaded, setIsLoaded] = useState(false)
   return (
     <motion.div
       variants={fadeUp}
@@ -43,14 +45,22 @@ const Walking = (props: Props) => {
           </p>
 
           <hr className="border border-muted" />
-
-          <Image
-            src="https://us-east-1.tixte.net/uploads/omm.needs.rest/walkingBlog.png"
-            alt="Walking"
-            width={1000}
-            height={200}
-            className="rounded-xl object-contain"
-          />
+          <motion.div
+  initial={{ opacity: 0 }}
+  animate={{ opacity: isLoaded ? 1 : 0 }}
+  transition={{ duration: 0.8, ease: 'easeOut' }}
+>
+  <Image
+    src={WalkingBlog}
+    alt="Walking"
+    placeholder="blur"
+    blurDataURL={WalkingBlog.blurDataURL}
+    width={1000}
+    height={200}
+    className="rounded-xl object-contain transition-all duration-700 ease-in-out"
+    onLoadingComplete={() => setIsLoaded(true)}
+  />
+</motion.div>
 
           <motion.h2 whileHover={{ scale: 1.02 }} className="text-xl font-semibold pt-4 transition-colors hover:text-primary">
             🚶 Walking Unwinds the Mind
