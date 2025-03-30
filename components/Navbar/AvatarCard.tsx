@@ -18,11 +18,9 @@ export default function AvatarCard() {
         />
         <div className="space-y-0.5">
           <HoverCardTrigger asChild>
-            <p>
-              <a className="text-sm font-medium hover:underline" href="#">
-                Om Shah
-              </a>
-            </p>
+            <div className="text-sm font-medium cursor-pointer">
+                <span className="underline">Om Shah</span> <span className="text-xs text-muted-foreground ml-2 no-underline">(Hover it)</span>
+            </div>
           </HoverCardTrigger>
           <p className="text-muted-foreground text-xs">@maiommhoon</p>
         </div>

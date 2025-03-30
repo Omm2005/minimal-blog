@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Heart } from "lucide-react";
 import confetti from "canvas-confetti";
+import { NumberTicker } from "./number-ticker";
 
 export default function LikeButton() {
   const [liked, setLiked] = useState(false);
@@ -35,7 +36,7 @@ export default function LikeButton() {
     <motion.button
       onClick={handleClick}
       className={`flex items-center px-3 py-1 rounded-full transition-colors cursor-pointer gap-2 ${
-        liked ? "bg-red-100 dark:bg-red-950 text-red-400" : "text-zinc-400"
+        liked ? "bg-red-100 dark:bg-red-950 text-red-400" : "text-foreground"
       }`}
       whileTap={{ scale: 0.9 }}
     >
@@ -44,9 +45,10 @@ export default function LikeButton() {
         fill={liked ? "currentColor" : "transparent"}
         className="transition-colors"
       />
-      <span className="text-sm">
-        {(count)}
-      </span>
+      <NumberTicker
+      className="text-sm text-foreground"
+      value={count}
+      />
     </motion.button>
   );
 }
