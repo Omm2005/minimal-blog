@@ -1,7 +1,7 @@
 // Walking.tsx
 'use client'
 
-import React, { useState } from 'react'
+import React from 'react'
 import { Card, CardContent } from '../ui/card'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
@@ -19,7 +19,7 @@ const fadeUp = {
 }
 
 const Walking = (props: Props) => {
-  const [isLoaded, setIsLoaded] = useState(false)
+  const [loaded, setLoaded] = React.useState(false)
   return (
     <motion.div
       variants={fadeUp}
@@ -45,22 +45,20 @@ const Walking = (props: Props) => {
           </p>
 
           <hr className="border border-muted" />
-          <motion.div
-  initial={{ opacity: 0 }}
-  animate={{ opacity: isLoaded ? 1 : 0 }}
-  transition={{ duration: 0.8, ease: 'easeOut' }}
->
-  <Image
-    src={WalkingBlog}
-    alt="Walking"
+          <div className="relative w-full aspect-[5/1]">
+          <Image
+            src={WalkingBlog}
+            alt="Walking"
+  onLoad={() => setLoaded(true)}
+  data-loaded={loaded}
+            blurDataURL={WalkingBlog.blurDataURL}
+
     placeholder="blur"
-    blurDataURL={WalkingBlog.blurDataURL}
     width={1000}
     height={200}
-    className="rounded-xl object-contain transition-all duration-700 ease-in-out"
-    onLoadingComplete={() => setIsLoaded(true)}
-  />
-</motion.div>
+            className="rounded-xl object-cover transition-opacity duration-700 opacity-0 data-[loaded=true]:opacity-100"
+          />
+          </div>
 
           <motion.h2 whileHover={{ scale: 1.02 }} className="text-xl font-semibold pt-4 transition-colors hover:text-primary">
             🚶 Walking Unwinds the Mind
@@ -78,9 +76,9 @@ const Walking = (props: Props) => {
 
           <ul className="list-disc list-inside space-y-1 text-foreground">
             {[
-              'Walking has a rhythm that matches the mind&apos;s pace.',
+              `Walking has a rhythm that matches the mind's pace.`,
               'It invites daydreaming, observation, and calm awareness.',
-              'Stillness, even while you&apos;re moving.',
+              `Stillness, even while you're moving.`,
             ].map((item, i) => (
               <motion.li
                 key={i}
