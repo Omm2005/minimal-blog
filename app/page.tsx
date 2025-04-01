@@ -64,8 +64,8 @@ export default function Home() {
           animate="visible"
           custom={0.2}
         >
-          {selectedCategories.length === topics.length && 'Bruh'}
-          {selectedCategories.length === 0 && 'All categories selected'}
+          {selectedCategories.length === 0 && 'Bruh'}
+          {selectedCategories.length === topics.length && 'All categories selected'}
         </motion.p>
 
         <motion.div
